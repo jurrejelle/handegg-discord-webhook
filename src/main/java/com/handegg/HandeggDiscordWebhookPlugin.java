@@ -33,14 +33,15 @@ import static net.runelite.http.api.RuneLiteAPI.GSON;
 )
 public class HandeggDiscordWebhookPlugin extends Plugin
 {
-	public static int HANDEGG_THROWN_ANIMATIONID_1 = 7995;
-	public static int HANDEGG_THROWN_ANIMATIONID_2 = 7996;
+	public static int HOLY_HANDEGG_THROWN_ANIMATIONID = 7994;
+	public static int PEACEFUL_HANDEGG_THROWN_ANIMATIONID = 7995;
+	public static int CHAOTIC_HANDEGG_THROWN_ANIMATIONID = 7996;
 	public static int HANDEGG_RECEIVED_ANIMATIONID = 782;
 
-  public static HandeggState state = HandeggState.IDLE;
+	public static HandeggState state = HandeggState.IDLE;
 
-  private static int currentGameTick = 0;
-  private static int lastStateChanged;
+	private static int currentGameTick = 0;
+	private static int lastStateChanged;
 	private static String lastThrower = "";
 	private static String lastReciever = "";
 	private static String currentPlayer;
@@ -85,7 +86,9 @@ public class HandeggDiscordWebhookPlugin extends Plugin
 
 		String actorName = animationChanged.getActor().getName();
 
-		if(changedAnimationID == HANDEGG_THROWN_ANIMATIONID_1 || changedAnimationID == HANDEGG_THROWN_ANIMATIONID_2){
+		if(	changedAnimationID == HOLY_HANDEGG_THROWN_ANIMATIONID     ||
+				changedAnimationID == PEACEFUL_HANDEGG_THROWN_ANIMATIONID ||
+				changedAnimationID == CHAOTIC_HANDEGG_THROWN_ANIMATIONID){
 
 			// If I'm the one who threw the handegg
 			if(currentPlayer.equals(actorName)){
